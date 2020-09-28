@@ -1,0 +1,60 @@
+<html><head><title>Book</title><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{{url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{url_for('static', filename='css/font-awesome.css')}}">
+<style type="text/css">body{ background-color: black; margin: 0;/* 去掉八个像素外边距 */}
+#form_div{ height: 500px; position: absolute; margin-left: 400px;}
+#form_div>div{ width: 280px; height: 296px; margin: 122px 122px 0 0; background-color: rgba(0,0,0,0.3); float: right;}
+#form_div>div>div{ float: left; overflow: hidden; width: 253px; height: 277px; position: relative;}
+.duanggg{ position: relative; margin-left: 10px; margin-right: 8px; margin-bottom:25px;}
+.duanggg>input{ border: 1px solid #ddd; padding: 10px 20px; width: 260px; margin-top: 16px; margin-bottom: 26px;}
+.button_search{ background: #27b0f6; width: 260px; color: white; margin-left: 10px; text-align: center; line-height: 32px; font-weight: bold; border: none;}
+#result{ margin-top: 400px; position: absolute; margin-left: 370px; color: #e2777a;}
+</style></head><body><div class="agileits_w3layouts_banner_nav"><nav class="navbar navbar-default">
+<div class="navbar-header navbar-left"><h1><a class="navbar-brand" href="#"> <span>W</span>elcome</a></h1></div>
+<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+<nav class="link-effect-2" id="link-effect-2"><ul class="nav navbar-nav">
+<li class="active"><a href="#" class="effect-3">Search</a></li><li><a href="#" class="effect-3">Book</a></li>
+<li><a href="#" class="effect-3">Help</a></li><li class="dropdown">
+<a href="#" class="dropdown-toggle effect-3" data-toggle="dropdown">Sign <b class="caret"></b></a></li>
+<li><a href="#" class="effect-3">Mail Us</a></li></ul></nav></div></nav><div class="clearfix"> </div></div>
+
+<div id="form_div"><div><form method="post" action="/book/search"><div>
+<h3 class="w3l_header w3_agileits_header">Book <span>Search</span></h3><div class="duanggg">
+<input type="txt" name='keyword' placeholder="Input Keyword" required minlength="2" maxlength="20"></div>
+<input class="button_search" type="submit"></div></form></div></div>
+
+<div id="result">
+	{% for num in nums %}
+		<tr>
+		<h2>{{num.name}}</h2>
+		<h4>相关度:{{num.per}}</h4>>
+		<td>{{num.auth}}</td>
+		<td>{{num.time}}</td>
+		<td>{{num.rar}}</td>
+		<td>{{num.txt}}</td>
+		<td>{{num.intro}}</td><br>
+		</tr>
+	{% endfor %}
+</div>
+
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.4.2.js')}}"></script>
+<script type="text/javascript">
+	setInterval(function(){
+		var img = $("<img src='{{url_for('static', filename='img/snow.png')}}' width='10px'>");
+		//得到5～20随机数
+		var size = parseInt(Math.random() * 16 + 5);
+		//得到随机left值
+		var w = document.body.clientWidth;
+		var left = parseInt(Math.random() * (w - size));
+		//设置样式
+		img.css({"width": size + "px", "position": "absolute", "left": left + "px"});
+		$("body").append(img);
+		//做动画
+		var h = document.body.parentElement.clientHeight;
+		var top = img.animate({"top": h-size + "px"}, size*5000).fadeOut(20000,function(){
+			img.remove();
+		});
+	},150);
+</script></body></html>
